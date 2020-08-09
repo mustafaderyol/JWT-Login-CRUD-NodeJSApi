@@ -11,15 +11,6 @@ let userRouter = require('./routes/user');
 
 let app = express();
 
-// Error Messages
-const errorMessageTR = require('./error_messages/tr');
-const errorMessageENG = require('./error_messages/eng');
-if (true) { // TR gelirse
-    app.set('errorMessages', errorMessageTR.messageList);
-} else { // ENG gelirse
-    app.set('errorMessages', errorMessageENG.messageList);
-}
-
 // Db connection
 const database = require('./helpers/database')();
 
@@ -30,15 +21,21 @@ app.set('api_secret_key', config.api_secret_key);
 // Middleware
 const verifyToken = require('./middleware/verify-token');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// Language
+app.use(function (req, res, next) {
+  let lang = req.headers['x-lang'] || req.body.lang || req.query.lang;
+  if(!lang){
+    lang = "eng";
+  }
+  const lang_json = require("./lang/"+lang+"/error.json");
+  app.set('api_language_json', lang_json);
+  next();
+});
 
 // Route Configuration
 app.use('/', indexRouter);
@@ -56,7 +53,6 @@ app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
     // render the error page
     res.status(err.status || 500);
     res.json({

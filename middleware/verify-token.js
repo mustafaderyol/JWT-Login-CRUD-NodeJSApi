@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
             if (err) {
                 res.json({
                     status: false,
-                    message: 'Failed to authenticate token',
+                    message: req.app.get('api_language_json')['FAIL_TOKEN'],
                     data: null
                 });
             } else {
@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
     } else {
         res.json({
             status: false,
-            message: 'No token',
+            message: req.app.get('api_language_json')['NOT_EXISTS_TOKEN'],
             data: null
         });
     }

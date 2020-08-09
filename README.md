@@ -1,2 +1,7 @@
-# JWT-Login-CRUD-NodeJSApi
-JWT-Login-CRUD-NodeJS Api
+# OrdUp
+
+DEFAULT PORT: 3000
+
+``` 
+npm start
+```

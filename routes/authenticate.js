@@ -18,7 +18,7 @@ router.post('/authenticate', function (req, res, next) {
         if (!user) {
             res.json({
                 status: false,
-                message: 'Auth Fail, user not found',
+                message: req.app.get('api_language_json')['USER_NOT_FOUND'],
                 data: null
             });
         } else {
@@ -67,7 +67,7 @@ router.post('/register', (req, res, next) => {
         }).catch((err) => {
             res.json({
                 success: false,
-                message: "İşlem Başarısız: "+ err,
+                message: req.app.get('api_language_json')['FAILED'] + err,
                 data: null
             });
         });

@@ -1,0 +1,6 @@
+{
+  "FAIL_TOKEN": "Hatalı token",
+  "NOT_EXISTS_TOKEN":"Token bulunamadı.",
+  "USER_NOT_FOUND":"Kullanıcı bulunamadı.",
+  "FAILED": "İşlem Başarısız: "
+}

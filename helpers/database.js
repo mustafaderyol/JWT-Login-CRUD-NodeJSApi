@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 module.exports = () => {
-    mongoose.connect('mongodb://localhost:27017/deneme', {useNewUrlParser: true});
+	// mongodb://{host}:27017/{password}
+    mongoose.connect('mongodb://localhost:27017/deneme', {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.set('useCreateIndex', true);
     mongoose.connection.on('open', () => {
         console.log("connect");
     });

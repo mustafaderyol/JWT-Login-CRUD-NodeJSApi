@@ -26,7 +26,7 @@ router.get('/findById/:id', (req, res) => {
         if(!data){
             next({
                 status: false,
-                message: 'Data not found',
+                message: req.app.get('api_language_json')['USER_NOT_FOUND'],
                 data: null
             });
         }
@@ -50,7 +50,7 @@ router.delete('/:id', (req, res, next) => {
         if (!id) {
             next({
                 status: false,
-                message: 'User is not found',
+                message: req.app.get('api_language_json')['USER_NOT_FOUND'],
                 data: null
             });
         }
@@ -62,7 +62,7 @@ router.delete('/:id', (req, res, next) => {
     }).catch((err) => {
         res.json({
             status: false,
-            message: 'İşlem Başarısız' + err,
+            message: req.app.get('api_language_json')['FAILED'] + err,
             data: null
         });
     });

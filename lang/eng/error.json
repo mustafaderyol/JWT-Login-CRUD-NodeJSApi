@@ -1,0 +1,6 @@
+{
+  "FAIL_TOKEN": "Failed to authenticate token",
+  "NOT_EXISTS_TOKEN":"Not exists token",
+  "USER_NOT_FOUND":"User not found",
+  "FAILED": "Fail: "
+}
